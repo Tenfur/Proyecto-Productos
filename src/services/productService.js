@@ -1,10 +1,10 @@
 const Product = require("../models/Product");
 
-
 exports.createProduct = async (req, res) => {
-    const user = req.body;
+    const product = req.body;
+    product.user = req.userId;
     try{
-        await Product.create(user);
+        await Product.create(product);
         res.status(200).json({
             "message": "Ceated successfully",
             "data": req.body
@@ -20,7 +20,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
     try{
-        const products = await Product.find();
+        const products = await Product.find().populate("user");
         res.status(200).json({
             "data": products
         })

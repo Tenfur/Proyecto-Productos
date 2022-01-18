@@ -10,25 +10,30 @@ const validators = require("../helpers/validatorsProduct");
 
 // Middlewares
 const validateFields = require("../middlewares/validateFields");
+const {validateJWT} = require("../middlewares/validateJwt");
 
 // Get all products
 router.get("/", productService.getProducts);
 
 // Create product
-router.post("/", productService.createProduct);
+router.post("/",[
+    validateJWT
+], productService.createProduct);
 
 // Delete product
-router.delete("/:id",
+router.delete("/:id",[
+    validateJWT,
     check("id").isMongoId(),
     check("id").custom(validators.validateIdProduct),
-    validateFields,
+    validateFields],
 productService.deleteProduct);
 
 // Update product
-router.put("/:id",
+router.put("/:id",[
+    validateJWT,
     check("id").isMongoId(),
     check("id").custom(validators.validateIdProduct),
-    validateFields,
+    validateFields],
 productService.updateProduct);
 
 

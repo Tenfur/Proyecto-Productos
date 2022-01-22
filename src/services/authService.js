@@ -8,7 +8,7 @@ exports.login = async (req, res) => {
     const user = await User.findOne({email});
     if(!user){
         return res.status(400).json({
-            msg: "That user doesn't exist in the database"
+            msg: "That user doesn't exist in the app"
         })
     }
     // Validate password
@@ -23,8 +23,23 @@ exports.login = async (req, res) => {
     const token = await generateJWT(user._id);
 
     res.status(200).json({
-        msg: "Welcome",
+        user,
         token
     })
+}
+
+exports.authenticateUser = async(req, res) => {
+    try{
+        const user = await User.findById(req.userId);
+        res.json({
+            user
+        })
+    }
+    catch(error){
+        res.status(500).json({
+            msg: "There's an error"
+        })
+    }
+   
 
 }

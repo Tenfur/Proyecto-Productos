@@ -6,8 +6,7 @@ const productSchema = new Schema({
         unique: true
     },
     price: {
-        type: Number,
-        required: true
+        type: Number
     },
     user:{
         type: Schema.Types.ObjectId,

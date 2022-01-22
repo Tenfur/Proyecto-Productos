@@ -14,9 +14,11 @@ const validatesFields = require("../middlewares/validateFields");
 // Create user
 router.post("/",
     check("email").custom(validatorUser.validateEmail),
+    check("name").custom(validatorUser.validateName),
     validatesFields,
 userService.createuser);
 
+router.get("/:id/products", userService.getProductsByUserId);
 
 
 

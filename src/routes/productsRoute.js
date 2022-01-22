@@ -11,13 +11,17 @@ const validators = require("../helpers/validatorsProduct");
 // Middlewares
 const validateFields = require("../middlewares/validateFields");
 const {validateJWT} = require("../middlewares/validateJwt");
+const uploadFile = require("../middlewares/uploadFile");
 
 // Get all products
 router.get("/", productService.getProducts);
 
+// Get product By Id
+router.get("/:id", productService.getProductById);
+
 // Create product
 router.post("/",[
-    validateJWT
+    validateJWT,
 ], productService.createProduct);
 
 // Delete product

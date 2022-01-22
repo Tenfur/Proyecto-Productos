@@ -11,7 +11,8 @@ const schemaUser = new Schema({
         type: String
     },
     name: {
-        type: String
+        type: String,
+        required: true
     }
 });
 

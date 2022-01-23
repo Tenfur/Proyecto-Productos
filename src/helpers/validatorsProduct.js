@@ -6,4 +6,3 @@ exports.validateIdProduct = async (id ="") => {
         throw new Error("This id is incorrect")
     }
 }
-

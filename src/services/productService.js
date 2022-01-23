@@ -4,21 +4,27 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 
 exports.createProduct = async (req, res) => {
     const product = req.body;
-    product.user = req.userId;
-    const {tempFilePath} = req.files.file;
-    const {secure_url} = await cloudinary.uploader.upload(tempFilePath);
-    product.img = secure_url;
-    try{
-        await Product.create(product);
-        res.status(200).json({
-            "message": "Created successfully",
-            "data": req.body
-        })
+    if(req.files){
+        product.user = req.userId;
+        const {tempFilePath} = req.files.file;
+        const {secure_url} = await cloudinary.uploader.upload(tempFilePath);
+        product.img = secure_url;
+        try{
+            await Product.create(product);
+            res.status(200).json({
+                "message": "Created successfully",
+                "data": req.body
+            })
+        }catch(error){
+            res.status(404).json({
+                "message": "Error",
+                error
+            })
+        }
     }
-    catch(error){
-        res.status(404).json({
-            "message": "Error",
-            error
+    else{
+        return res.status(400).json({
+            msg: "The photo is neccessary"
         })
     }
 }

@@ -22,6 +22,8 @@ router.get("/:id", productService.getProductById);
 // Create product
 router.post("/",[
     validateJWT,
+    check("name", "Enter antoher name").notEmpty(),
+    validateFields
 ], productService.createProduct);
 
 // Delete product

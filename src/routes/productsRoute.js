@@ -11,7 +11,7 @@ const validators = require("../helpers/validatorsProduct");
 // Middlewares
 const validateFields = require("../middlewares/validateFields");
 const {validateJWT} = require("../middlewares/validateJwt");
-const uploadFile = require("../middlewares/uploadFile");
+
 
 // Get all products
 router.get("/", productService.getProducts);

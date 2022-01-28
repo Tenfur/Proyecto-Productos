@@ -30,9 +30,10 @@ exports.createProduct = async (req, res) => {
 }
 
 exports.getProducts = async (req, res) => {
+    const {since, limit} = req.query;
     
     try{
-        const products = await Product.find().populate("user");
+        const products = await Product.find().populate("user").skip(Number(since)).limit(Number(limit));
         res.status(200).json({
             "data": products
         })
@@ -87,6 +88,7 @@ exports.updateProduct = async(req,res) => {
 
 exports.getProductById = async(req, res) => {
     const {id} = req.params;
+    console.log(id);
     try{
         const product = await Product.findById(id).select("-_id");
         return res.status(200).json({

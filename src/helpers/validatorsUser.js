@@ -1,7 +1,7 @@
 const User = require("../models/User");
 
 exports.validateIdUser = async (id = "") => {
-    const user = await User.finById(id);
+    const user = await User.findById(id);
     if(!user){
         throw new Error("This user id doesn't exist in the server");
     }

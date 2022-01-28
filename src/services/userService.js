@@ -88,8 +88,9 @@ exports.updateUser = async (req, res) => {
 }
 
 exports.getUsers = async (req, res) => {
+    const {since, limit} = req.query;
     try{
-        const data = await User.find();
+        const data = await User.find().skip(Number(since)).limit(Number(limit));
         return res.status(200).json(data);
     }
     catch(error){

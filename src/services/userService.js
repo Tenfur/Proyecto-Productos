@@ -43,7 +43,6 @@ exports.createuser = async (req, res) => {
     }
 }
 
-
 exports.getProductsByUserId = async (req, res) => {
     const {id} = req.params;
     try{
@@ -58,7 +57,6 @@ exports.getProductsByUserId = async (req, res) => {
         })
     }
 }
-
 
 exports.updateUser = async (req, res) => {
     console.log(req.body);
